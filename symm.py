@@ -4,11 +4,10 @@ from discord.flags import PublicUserFlags
 from PIL import Image, ImageOps
 import io
 
-from icecream import ic
 
 
 # 自分のBotのアクセストークンに置き換えてください
-TOKEN = 'OTEwNTM1NjYyMjg4MTMwMTE4.YZUQag.wg_KNnUBvWG-WEn7X8k2rbNWOu0'
+TOKEN = 'OTA5MjU5NTM1NDY4ODU5NDIy.YZBr7g.1zPB0NoAxYa7LW6sQ5CsBDFbi10'
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
