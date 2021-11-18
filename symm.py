@@ -5,9 +5,12 @@ from PIL import Image, ImageOps
 import io
 
 
+# load .env file
+from dotenv import load_dotenv
+load_dotenv()
 
-# 自分のBotのアクセストークンに置き換えてください
-TOKEN = 'OTA5MjU5NTM1NDY4ODU5NDIy.YZBr7g.1zPB0NoAxYa7LW6sQ5CsBDFbi10'
+TOKEN = os.getenv('DISCORD_TOKEN')
+
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
