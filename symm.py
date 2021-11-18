@@ -22,24 +22,26 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
+    global img
+
     if message.author.bot:
         return
 
+    if message.attachments:
+
+        for attachment in message.attachments:
+
+            #送られた画像の取得
+            if attachment.url.endswith(("png", "jpg", "jpeg")):
+
+                attachment = message.attachments[0]
+
+                img_in = await attachment.read()
+                img_bin = io.BytesIO(img_in)
+
+                img = Image.open(img_bin)
+
     if message.content in ('/sym', '/syml', '/symr'):
-
-        if message.attachments:
-
-            for attachment in message.attachments:
-
-                #送られた画像の取得
-                if attachment.url.endswith(("png", "jpg", "jpeg")):
-
-                    attachment = message.attachments[0]
-
-                    img_in = await attachment.read()
-                    img_bin = io.BytesIO(img_in)
-
-                    img = Image.open(img_bin)
 
         # 取得した画像をコマンドに応じてシンメトリーに変換
         images = symmetry(message, img)
@@ -55,14 +57,7 @@ def symmetry(message, img):
     if message.content in ('/syml', '/sym'):
 
         imgl = img
-        
-        """
-        crop関数の2の数値を変更すると変化の大きさを変えられる
-        目安1.1~3.1まで
-        1にするとエラー 20まで変化する
-        1~30まで数値設定するとかできそう
-        """
-        
+
         imgl_1 = imgl.crop((0, 0, imgl.size[0] // 2, imgl.size[1]))
         imgl_2 = ImageOps.mirror(imgl_1)
 
@@ -76,10 +71,6 @@ def symmetry(message, img):
     if message.content in ('/symr', '/sym'):
 
         imgr = img
-        
-        """
-        上と同様
-        """
 
         imgr_1 = imgr.crop((imgr.size[0] // 2, 0, imgr.size[0], imgr.size[1]))
         imgr_2 = ImageOps.mirror(imgr_1)
