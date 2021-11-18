@@ -55,7 +55,14 @@ def symmetry(message, img):
     if message.content in ('/syml', '/sym'):
 
         imgl = img
-
+        
+        """
+        crop関数の2の数値を変更すると変化の大きさを変えられる
+        目安1.1~3.1まで
+        1にするとエラー 20まで変化する
+        1~30まで数値設定するとかできそう
+        """
+        
         imgl_1 = imgl.crop((0, 0, imgl.size[0] // 2, imgl.size[1]))
         imgl_2 = ImageOps.mirror(imgl_1)
 
@@ -69,6 +76,10 @@ def symmetry(message, img):
     if message.content in ('/symr', '/sym'):
 
         imgr = img
+        
+        """
+        上と同様
+        """
 
         imgr_1 = imgr.crop((imgr.size[0] // 2, 0, imgr.size[0], imgr.size[1]))
         imgr_2 = ImageOps.mirror(imgr_1)
