@@ -4,12 +4,19 @@ from discord.flags import PublicUserFlags
 from PIL import Image, ImageOps
 import io
 
+
+
+# load .env file
+from dotenv import load_dotenv
+load_dotenv()
+
+TOKEN = os.getenv('DISCORD_TOKEN')
+
 habaL = {'1':1.6, '2':1.7, '3':1.8, '4':1.9, '5':2, '6':2.1, '7':2.2, '8':2.3, '9':2.4, '10':2.5}
 ch_images = dict()
 ch_id = -1
 
-# 自分のBotのアクセストークンに置き換えてください
-TOKEN = 'OTA5MjU5NTM1NDY4ODU5NDIy.YZBr7g.1zPB0NoAxYa7LW6sQ5CsBDFbi10'
+
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
