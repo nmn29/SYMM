@@ -3,6 +3,7 @@ from discord import file
 from discord.flags import PublicUserFlags 
 from PIL import Image, ImageOps
 import io
+import os
 
 
 
