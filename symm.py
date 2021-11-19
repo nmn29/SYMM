@@ -5,6 +5,8 @@ from PIL import Image, ImageOps
 import io
 
 habaL = {'1':1.6, '2':1.7, '3':1.8, '4':1.9, '5':2, '6':2.1, '7':2.2, '8':2.3, '9':2.4, '10':2.5}
+ch_images = dict()
+ch_id = -1
 
 # 自分のBotのアクセストークンに置き換えてください
 TOKEN = 'OTA5MjU5NTM1NDY4ODU5NDIy.YZBr7g.1zPB0NoAxYa7LW6sQ5CsBDFbi10'
@@ -23,13 +25,17 @@ async def on_ready():
 async def on_message(message):
 
     global img
+    global ch_id
 
     contents = message.content.split(' ')
 
     if message.author.bot:
         return
 
+    ch_id = message.channel.id
+
     if message.attachments:
+        
 
         for attachment in message.attachments:
 
@@ -43,17 +49,21 @@ async def on_message(message):
 
                 img = Image.open(img_bin)
 
+                ch_images[str(ch_id)] = img
+
     if contents[0] in ('/sym', '/syml', '/symr'):
 
-        if len(contents) == 1:
-            images = symmetry(contents[0], img)
+        if str(ch_id) not in ch_images.keys():
+            await message.channel.send('画像がありません')
         else:
-            images = symmetry(contents[0], img, habaL[contents[1]])
+            if len(contents) == 1:
+                images = symmetry(contents[0], ch_images[str(ch_id)])
+            elif contents[1]:
+                images = symmetry(contents[0], ch_images[str(ch_id)], habaL[contents[1]])
 
-        # 変換した画像をチャンネルに送信
-        for image in images:
-            await message.channel.send(file=discord.File(fp=image, filename='res.png'))
-
+            # 変換した画像をチャンネルに送信
+            for image in images:
+                await message.channel.send(file=discord.File(fp=image, filename='res.png'))
 
 #シンメトリー変換関数
 def symmetry(command, img, haba=2):
