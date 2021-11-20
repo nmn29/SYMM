@@ -14,9 +14,4 @@ setup(
     include_package_data=True,
     # license='',
     install_requires=open("requirements.txt").read().splitlines(),
-    entry_points={
-        'console_scripts': [
-            'symm=symm.main:main'
-        ]
-    }
-)
+    entry_points={'console_scripts': ['symm=symm.main:main']})

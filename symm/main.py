@@ -4,22 +4,22 @@ import traceback
 import os
 from dotenv import load_dotenv
 
-
 intents = discord.Intents.all()
 cogs = [
-   '.cogs.help',
-   '.cogs.symmetry',
-    ]
+    '.cogs.help',
+    '.cogs.symmetry',
+]
 
 #cogs.help = ヘルプコマンド
 #cogs.symmetry = シンメトリー処理の実行
 
+
 class MyBot(commands.Bot):
 
     # MyBotのコンストラクタ。
-    def __init__(self, command_prefix,help_command,intents):
+    def __init__(self, command_prefix, help_command, intents):
         # スーパークラスのコンストラクタに値を渡して実行。
-        super().__init__(command_prefix,help_command,intents=intents)
+        super().__init__(command_prefix, help_command, intents=intents)
 
         # cogsに格納されている名前から、コグを読み込む。
         # エラーが発生した場合は、エラー内容を表示。
@@ -28,12 +28,13 @@ class MyBot(commands.Bot):
                 self.load_extension(cog)
             except Exception:
                 traceback.print_exc()
-        
+
     async def on_ready(self):
         print('-----')
         print(self.user.name)
         print(self.user.id)
         print('-----')
+
 
 def main():
     load_dotenv()
@@ -43,8 +44,9 @@ def main():
         raise ValueError("`DISCORD_BOT_TOKEN` is not defined in your env.")
     bot = MyBot(command_prefix='/', help_command=None, intents=intents)
     #command_prefix='/'でコマンドの開始文字を指定
-    
-    bot.run(BOT_TOKEN) # Botのトークン
+
+    bot.run(BOT_TOKEN)  # Botのトークン
+
 
 if __name__ == '__main__':
     main()
