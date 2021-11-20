@@ -1,7 +1,8 @@
+import os
+import traceback
+
 import discord
 from discord.ext import commands
-import traceback
-import os
 from dotenv import load_dotenv
 
 intents = discord.Intents.all()
@@ -10,8 +11,8 @@ cogs = [
     '.cogs.symmetry',
 ]
 
-#cogs.help = ヘルプコマンド
-#cogs.symmetry = シンメトリー処理の実行
+# cogs.help = ヘルプコマンド
+# cogs.symmetry = シンメトリー処理の実行
 
 
 class MyBot(commands.Bot):
@@ -42,9 +43,9 @@ def main():
         BOT_TOKEN = os.environ['DISCORD_BOT_TOKEN']
     except KeyError:
         raise ValueError("`DISCORD_BOT_TOKEN` is not defined in your env.")
-    bot = MyBot(command_prefix='/', help_command=None, intents=intents)
-    #command_prefix='/'でコマンドの開始文字を指定
 
+    # command_prefix='/'でコマンドの開始文字を指定
+    bot = MyBot(command_prefix='/', help_command=None, intents=intents)
     bot.run(BOT_TOKEN)  # Botのトークン
 
 
