@@ -33,7 +33,7 @@ class Symm(commands.Cog):
             for attachment in message.attachments:
 
                 #送られた画像の取得
-                if attachment.url.endswith(("png", "jpg", "jpeg")):
+                if attachment.url.endswith(("png", "jpg", "jpeg", "bmp")):
 
                     attachment = message.attachments[0]
 
@@ -100,7 +100,7 @@ class Symm(commands.Cog):
 
             syml = Image.new('RGB', (imgr_1.width + imgr_2.width, imgr_1.height))
             syml.paste(imgr_2, (0, 0))
-            syml.paste(imgr_1, (imgr_1.width, 0))
+            syml.paste(imgr_1, (imgr_2.width, 0))
             b = io.BytesIO()
             syml.save(b, format='PNG')
             bs.append(io.BytesIO(b.getvalue()))
