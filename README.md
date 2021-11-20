@@ -42,10 +42,10 @@ py symm.py
 
 <br>
 
-- /sym
+- s!sym
 
 ```
-/syml、/symrの両方の実行結果を送信
+s!syml、s!symrの両方の実行結果を送信
 ```
 
 <br>
