@@ -37,7 +37,10 @@ class MyBot(commands.Bot):
 
 def main():
     load_dotenv()
-    BOT_TOKEN = os.environ['DISCORD_BOT_TOKEN']
+    try:
+        BOT_TOKEN = os.environ['DISCORD_BOT_TOKEN']
+    except KeyError:
+        raise ValueError("`DISCORD_BOT_TOKEN` is not defined in your env.")
     bot = MyBot(command_prefix='/', help_command=None, intents=intents)
     #command_prefix='/'でコマンドの開始文字を指定
     
