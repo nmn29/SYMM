@@ -95,12 +95,12 @@ class Symm(commands.Cog):
 
             imgr = img
 
-            imgr_1 = imgr.crop((imgr.size[0] // haba, 0, imgr.size[0], imgr.size[1]))
-            imgr_2 = ImageOps.mirror(imgr_1)
+            imgr_2 = imgr.crop((imgr.size[0] // haba, 0, imgr.size[0], imgr.size[1]))
+            imgr_1 = ImageOps.mirror(imgr_2)
 
             syml = Image.new('RGB', (imgr_1.width + imgr_2.width, imgr_1.height))
-            syml.paste(imgr_2, (0, 0))
-            syml.paste(imgr_1, (imgr_2.width, 0))
+            syml.paste(imgr_1, (0, 0))
+            syml.paste(imgr_2, (imgr_1.width, 0))
             b = io.BytesIO()
             syml.save(b, format='PNG')
             bs.append(io.BytesIO(b.getvalue()))
