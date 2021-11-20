@@ -1,14 +1,12 @@
 import discord
 from discord.ext import commands
-from discord import file
-from discord.flags import PublicUserFlags 
 from PIL import Image, ImageOps
 import io
-import os
-
+import aiohttp
+import re
 
 habaL = {'1':1.6, '2':1.7, '3':1.8, '4':1.9, '5':2, '6':2.1, '7':2.2, '8':2.3, '9':2.4, '10':2.5}
-
+pattern = "https?://[\w/:%#\$&\?\(\)~\.=\+\-]+.(jpg|png|gif|bmp)"
 
 class Symm(commands.Cog):
     def __init__(self, bot):
@@ -43,6 +41,13 @@ class Symm(commands.Cog):
                     self.img = Image.open(img_bin)
 
                     self.ch_images[str(ch_id)] = self.img
+        elif re.match(pattern, message.content) and message.content.endswith(("png", "jpg", "jpeg")):
+            async with aiohttp.ClientSession() as session:
+                async with session.get(message.content) as res:
+                    if res.status == 200:
+                        img_bin = io.BytesIO(await res.read())
+                        self.img = Image.open(img_bin)
+                        self.ch_images[str(ch_id)] = self.img
                 
     
     @commands.command()
