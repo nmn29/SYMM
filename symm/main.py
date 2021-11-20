@@ -2,11 +2,13 @@ import discord
 from discord.ext import commands
 import traceback
 import os
+from dotenv import load_dotenv
+
 
 intents = discord.Intents.all()
 cogs = [
-   'cogs.help', 
-   'cogs.symmetry',
+   '.cogs.help',
+   '.cogs.symmetry',
     ]
 
 #cogs.help = ヘルプコマンド
@@ -33,9 +35,13 @@ class MyBot(commands.Bot):
         print(self.user.id)
         print('-----')
 
-if __name__ == '__main__':
+def main():
+    load_dotenv()
     BOT_TOKEN = os.environ['DISCORD_BOT_TOKEN']
     bot = MyBot(command_prefix='/', help_command=None, intents=intents)
     #command_prefix='/'でコマンドの開始文字を指定
     
     bot.run(BOT_TOKEN) # Botのトークン
+
+if __name__ == '__main__':
+    main()
