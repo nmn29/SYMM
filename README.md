@@ -18,30 +18,30 @@ $ git clone https://github.com/nmn29/SYMM && cd SYMM
 $ pip install
 ```
 
-- 実行
+## Run
 
 ```shellsession
 # Botが起動する
 $ symm
 ```
 
-## 使い方
+## Usage
 
-- `/syml`
+- `s!syml`
   - チャンネル内で送信された直近の画像の左側を使用したシンメトリー画像の送信
-- `/symr`
+- `s!symr`
   - チャンネル内で送信された直近の画像の右側を使用したシンメトリー画像の送信
-- `/sym`
-  - `/syml`、`/symr`の両方の実行結果を送信
-- `/sym <number>`
-- `/syml <number>`
-- `/symr <number>`
+- `s!sym`
+  - `s!syml`、`s!symr`の両方の実行結果を送信
+- `s!sym <number>`
+- `s!syml <number>`
+- `s!symr <number>`
   - 画像の変化量を`1`-`10`の数値で指定（デフォルトは5）
-  - 例: `/sym 10`
-- `/help sym`
+  - 例: `s!sym 10`
+- `s!help sym`
   - コマンドの一覧と説明を表示
 
-## 協力
+## Contributors
 
 - maguro869 様
 - nyanmi-1828 様
