@@ -35,7 +35,7 @@ class MyBot(commands.Bot):
 
 if __name__ == '__main__':
     BOT_TOKEN = os.environ['DISCORD_BOT_TOKEN']
-    bot = MyBot(command_prefix='/', help_command=None, intents=intents)
+    bot = MyBot(command_prefix='', help_command=None, intents=intents)
     #command_prefix='/'でコマンドの開始文字を指定
     
     bot.run(BOT_TOKEN) # Botのトークン
