@@ -98,7 +98,7 @@ class Symm(commands.Cog):
             imgr_2 = imgr.crop((imgr.size[0] // haba, 0, imgr.size[0], imgr.size[1]))
             imgr_1 = ImageOps.mirror(imgr_2)
 
-            symr = Image.new('RGB', (imgr_1.width + imgr_2.width, imgr_1.height))
+            symr = Image.new('RGB', (imgr_2.width + imgr_1.width, imgr_2.height))
             symr.paste(imgr_2, (0, 0))
             symr.paste(imgr_1, (imgr_1.width, 0))
             b = io.BytesIO()
