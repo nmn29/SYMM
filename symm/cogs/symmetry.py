@@ -5,16 +5,16 @@ from discord.ext import commands
 from PIL import Image, ImageOps
 
 habaL = {
-    '1': 1.6,
-    '2': 1.7,
-    '3': 1.8,
-    '4': 1.9,
-    '5': 2,
-    '6': 2.1,
-    '7': 2.2,
-    '8': 2.3,
-    '9': 2.4,
-    '10': 2.5
+    "1": 1.6,
+    "2": 1.7,
+    "3": 1.8,
+    "4": 1.9,
+    "5": 2,
+    "6": 2.1,
+    "7": 2.2,
+    "8": 2.3,
+    "9": 2.4,
+    "10": 2.5,
 }
 
 
@@ -27,7 +27,7 @@ class Symm(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
 
-        self.contents = message.content.split(' ')
+        self.contents = message.content.split(" ")
 
         if message.author.bot:
             return
@@ -64,46 +64,45 @@ class Symm(commands.Cog):
 
     async def execute(self, ctx, haba):
         if str(ctx.channel.id) not in self.ch_images.keys():
-            await ctx.send('画像がありません')
+            await ctx.send("画像がありません")
         else:
             images = []
             if haba is None:
                 images.extend(
-                    self.symmetry(
-                        ctx.command.name,
-                        self.ch_images[str(ctx.channel.id)]))
+                    self.symmetry(ctx.command.name,
+                                  self.ch_images[str(ctx.channel.id)]))
             elif haba:
                 images.extend(
                     self.symmetry(
                         ctx.command.name,
                         self.ch_images[str(ctx.channel.id)],
-                        habaL[haba]))
+                        habaL[haba],
+                    ))
 
             # 変換した画像をチャンネルに送信
             for image in images:
-                await ctx.send(file=discord.File(fp=image, filename='res.png'))
+                await ctx.send(file=discord.File(fp=image, filename="res.png"))
 
-    # シンメトリー処理（画像の左側）
     def symmetry(self, command, img, haba=2):
-
+        """シンメトリー処理（画像の左側）"""
         bs = list()
 
-        if command in ('syml', 'sym'):
+        if command in ("syml", "sym"):
 
             imgl = img
 
             imgl_1 = imgl.crop((0, 0, imgl.size[0] // haba, imgl.size[1]))
             imgl_2 = ImageOps.mirror(imgl_1)
 
-            syml = Image.new('RGB',
+            syml = Image.new("RGB",
                              (imgl_1.width + imgl_2.width, imgl_1.height))
             syml.paste(imgl_1, (0, 0))
             syml.paste(imgl_2, (imgl_1.width, 0))
             b = io.BytesIO()
-            syml.save(b, format='PNG')
+            syml.save(b, format="PNG")
             bs.append(io.BytesIO(b.getvalue()))
 
-        if command in ('symr', 'sym'):
+        if command in ("symr", "sym"):
 
             imgr = img
 
@@ -111,12 +110,12 @@ class Symm(commands.Cog):
                 (imgr.size[0] // haba, 0, imgr.size[0], imgr.size[1]))
             imgr_2 = ImageOps.mirror(imgr_1)
 
-            syml = Image.new('RGB',
+            syml = Image.new("RGB",
                              (imgr_1.width + imgr_2.width, imgr_1.height))
             syml.paste(imgr_1, (0, 0))
             syml.paste(imgr_2, (imgr_1.width, 0))
             b = io.BytesIO()
-            syml.save(b, format='PNG')
+            syml.save(b, format="PNG")
             bs.append(io.BytesIO(b.getvalue()))
 
         return bs

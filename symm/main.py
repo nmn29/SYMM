@@ -7,18 +7,17 @@ from dotenv import load_dotenv
 
 intents = discord.Intents.all()
 cogs = [
-    '.cogs.help',
-    '.cogs.symmetry',
+    ".cogs.help",
+    ".cogs.symmetry",
 ]
 
 # cogs.help = ヘルプコマンド
 # cogs.symmetry = シンメトリー処理の実行
 
 
-class MyBot(commands.Bot):
-
-    # MyBotのコンストラクタ。
+class SymmBot(commands.Bot):
     def __init__(self, command_prefix, help_command, intents):
+        """MyBotのコンストラクタ。"""
         # スーパークラスのコンストラクタに値を渡して実行。
         super().__init__(command_prefix, help_command, intents=intents)
 
@@ -31,23 +30,23 @@ class MyBot(commands.Bot):
                 traceback.print_exc()
 
     async def on_ready(self):
-        print('-----')
+        print("-----")
         print(self.user.name)
         print(self.user.id)
-        print('-----')
+        print("-----")
 
 
 def main():
     load_dotenv()
     try:
-        BOT_TOKEN = os.environ['DISCORD_BOT_TOKEN']
+        BOT_TOKEN = os.environ["DISCORD_BOT_TOKEN"]
     except KeyError:
         raise ValueError("`DISCORD_BOT_TOKEN` is not defined in your env.")
 
     # command_prefix='/'でコマンドの開始文字を指定
-    bot = MyBot(command_prefix='/', help_command=None, intents=intents)
-    bot.run(BOT_TOKEN)  # Botのトークン
+    bot = SymmBot(command_prefix="/", help_command=None, intents=intents)
+    bot.run(BOT_TOKEN) # Botのトークン
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
