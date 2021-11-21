@@ -1,4 +1,6 @@
+import aiohttp
 import io
+import re
 
 import discord
 from discord.ext import commands
@@ -17,6 +19,8 @@ habaL = {
     "10": 2.5,
 }
 
+
+pattern = "https?://[\w/:%#\$&\?\(\)~\.=\+\-]+.(jpg|png|gif|bmp)"
 
 class Symm(commands.Cog):
     def __init__(self, bot):
@@ -38,8 +42,8 @@ class Symm(commands.Cog):
 
             for attachment in message.attachments:
 
-                # 送られた画像の取得
-                if attachment.url.endswith(("png", "jpg", "jpeg")):
+                #送られた画像の取得
+                if attachment.url.endswith(("png", "jpg", "jpeg", "bmp", "jfif")):
 
                     attachment = message.attachments[0]
 
@@ -49,6 +53,15 @@ class Symm(commands.Cog):
                     self.img = Image.open(img_bin)
 
                     self.ch_images[str(ch_id)] = self.img
+
+        elif re.match(pattern, message.content) and message.content.endswith(("png", "jpg", "jpeg")):
+            async with aiohttp.ClientSession() as session:
+                async with session.get(message.content) as res:
+                    if res.status == 200:
+                        img_bin = io.BytesIO(await res.read())
+                        self.img = Image.open(img_bin)
+                        self.ch_images[str(ch_id)] = self.img
+
 
     @commands.command()
     async def sym(self, ctx, haba=None):
@@ -100,7 +113,8 @@ class Symm(commands.Cog):
             syml.save(b, format="PNG")
             bs.append(io.BytesIO(b.getvalue()))
 
-        if command in ("symr", "sym"):
+
+        if command in ('symr', 'sym'):
 
             imgr = img
 
@@ -111,8 +125,9 @@ class Symm(commands.Cog):
             syml = Image.new('RGBA', (imgr_1.width + imgr_2.width, imgr_1.height))
             syml.paste(imgr_2, (0, 0))
             syml.paste(imgr_1, (imgr_1.width, 0))
+
             b = io.BytesIO()
-            syml.save(b, format="PNG")
+            symr.save(b, format='PNG')
             bs.append(io.BytesIO(b.getvalue()))
 
         return bs

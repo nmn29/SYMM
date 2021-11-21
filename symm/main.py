@@ -17,7 +17,7 @@ cogs = [
 
 class SymmBot(commands.Bot):
     def __init__(self, command_prefix, help_command, intents):
-        """MyBotのコンストラクタ。"""
+        """SymmBotのコンストラクタ。"""
         # スーパークラスのコンストラクタに値を渡して実行。
         super().__init__(command_prefix, help_command, intents=intents)
 
@@ -43,8 +43,8 @@ def main():
     except KeyError:
         raise ValueError("`DISCORD_BOT_TOKEN` is not defined in your env.")
 
-    # command_prefix='/'でコマンドの開始文字を指定
-    bot = SymmBot(command_prefix="/", help_command=None, intents=intents)
+    # command_prefix='s!'でコマンドの開始文字を指定
+    bot = SymmBot(command_prefix="s!", help_command=None, intents=intents)
     bot.run(BOT_TOKEN) # Botのトークン
 
 
