@@ -31,7 +31,7 @@ class Symm(commands.Cog):
             for attachment in message.attachments:
 
                 #送られた画像の取得
-                if attachment.url.endswith(("png", "jpg", "jpeg")):
+                if attachment.url.endswith(("png", "jpg", "jpeg", "bmp", "jfif")):
 
                     attachment = message.attachments[0]
 
@@ -97,7 +97,7 @@ class Symm(commands.Cog):
             bs.append(io.BytesIO(b.getvalue()))
         
         if command in ('symr', 'sym'):
-
+            
             imgr = img
 
             imgr_1 = imgr.crop((imgr.size[0] // haba, 0, imgr.size[0], imgr.size[1]))
@@ -106,8 +106,9 @@ class Symm(commands.Cog):
             syml = Image.new('RGBA', (imgr_1.width + imgr_2.width, imgr_1.height))
             syml.paste(imgr_2, (0, 0))
             syml.paste(imgr_1, (imgr_1.width, 0))
+
             b = io.BytesIO()
-            syml.save(b, format='PNG')
+            symr.save(b, format='PNG')
             bs.append(io.BytesIO(b.getvalue()))
 
         return bs
