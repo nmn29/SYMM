@@ -12,20 +12,20 @@ class Help(commands.Cog):
             embed = discord.Embed(title="HELP SYMM",
                                   description="コマンド一覧",
                                   color=0x00FFFF)
-            embed.add_field(name="**/help sym**",
+            embed.add_field(name="**s!help sym**",
                             value="コマンドの一覧と説明を表示",
                             inline=False)
-            embed.add_field(name="**/syml**",
+            embed.add_field(name="**s!syml**",
                             value="チャンネル内の直近の画像の左側を使用したシンメトリー画像の送信",
                             inline=False)
-            embed.add_field(name="**/symr**",
+            embed.add_field(name="**s!symr**",
                             value="チャンネル内の直近の画像の左側を使用したシンメトリー画像の送信",
                             inline=False)
-            embed.add_field(name="**/sym**",
-                            value="/syml、/symrの両方の実行結果を送信",
+            embed.add_field(name="**s!sym**",
+                            value="s!syml、s!symrの両方の実行結果を送信",
                             inline=False)
             embed.add_field(
-                name="**/sym 1-10\n/syml 1-10\n/symr 1-10\n**",
+                name="**s!sym 1-10\n/syml 1-10\ns!symr 1-10\n**",
                 value="1から10の範囲で画像の変化量を指定\nデフォルトは5",
                 inline=False,
             )
