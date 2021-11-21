@@ -45,7 +45,7 @@ def main():
 
     # command_prefix='s!'でコマンドの開始文字を指定
     bot = SymmBot(command_prefix="s!", help_command=None, intents=intents)
-    bot.run(BOT_TOKEN) # Botのトークン
+    bot.run(BOT_TOKEN)  # Botのトークン
 
 
 if __name__ == "__main__":
