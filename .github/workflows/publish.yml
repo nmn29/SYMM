@@ -25,4 +25,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@master
         with:
           user: nmn29
-          password: ${{ secrets.cANB9d2emrXT }}
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
