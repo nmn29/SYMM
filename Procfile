@@ -1,1 +1,1 @@
-discordbot: python symm.py
+discordbot: pip install && symm
