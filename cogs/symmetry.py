@@ -41,7 +41,7 @@ class Symm(commands.Cog):
                     self.img = Image.open(img_bin)
 
                     self.ch_images[str(ch_id)] = self.img
-        elif re.match(pattern, message.content) and message.content.endswith(("png", "jpg", "jpeg")):
+        elif re.match(pattern, message.content) and message.content.endswith(("png", "jpg", "jpeg", "bmp", "jfif")):
             async with aiohttp.ClientSession() as session:
                 async with session.get(message.content) as res:
                     if res.status == 200:
